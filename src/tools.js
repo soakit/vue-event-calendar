@@ -43,9 +43,9 @@ export function dateTimeFormatter (date ,format) {
 
   return format
 }
-export function isEqualDateStr (dateStr1, dateStr2) {
-  let dateArr1 = dateStr1.split('/')
-  let dateArr2 = dateStr2.split('/')
+export function isEqualDateStr (dateStr1, dateStr2, separator) {
+  let dateArr1 = dateStr1.split(separator)
+  let dateArr2 = dateStr2.split(separator)
   if (parseInt(dateArr1[0], 10) !== parseInt(dateArr2[0], 10)) {
     return false
   }

@@ -3,7 +3,7 @@ import App from './App.vue'
 
 import vueEventCalendar from 'vue-event-calendar'
 
-Vue.use(vueEventCalendar, {locale: 'en'})
+Vue.use(vueEventCalendar, {locale: 'en', separator: '-'})
 
 new Vue({
   el: '#app',

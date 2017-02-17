@@ -49,7 +49,7 @@ export default {
         return {
           options: {
             locale: 'en', //zh
-            color: ' #f29543'
+            color: ' #1f91f4'
           },
           params: {
               curYear: dateObj.getFullYear(),
@@ -83,8 +83,8 @@ export default {
     handleChangeCurDay (date) {
       this.selectdDayEvents = {
         date: date,
-        events: this.events.filter(function(event) {
-          return isEqualDateStr(event.date, date)
+        events: this.events.filter((event) => {
+          return isEqualDateStr(event.date, date, this.calendarOptions.options.separator)
         })
       }
     }
@@ -105,12 +105,13 @@ export default {
 }
 </script>
 <style lang="less">
-@base-orange: #f29543;
+@base: #1f91f4;
 @white: #ffffff;
 @gray: #e0e0e0;
 @gray-dark: #b1b1b1;
 @large-padding: 15px;
 @small-padding: 10px;
+@gray2: #cac6ca;
 
 @icon-border-size: 1px;
 @media screen and (min-width: 768px) {
@@ -126,7 +127,7 @@ export default {
     }
     .events-wrapper{
       width: 50%;
-      background-color: @base-orange;
+      background-color: @base;
       color: @white;
       padding: 40px 50px;
       position: absolute;
@@ -212,41 +213,59 @@ export default {
         font-size: 1rem;
         .item{
           position: relative;
+          cursor: pointer;
           float: left;
           display: block;
           width: 14.285%;
-          cursor: default;
           -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-          .date-num{
-            font-size: 1rem;
-            position: relative;
-            z-index: 3;
+          &:hover, &.active{
+            color: @white;
+            .is-active{
+              display: block;
+            }
           }
-          &.event{
-            color: @base-orange;
-            cursor: pointer;
+          &.gray{
+            color: @gray2;
+            cursor: default;
           }
-          .is-event{
+          .is-active{
+            display: none;
             content: '';
-            border: 1px solid @base-orange;
-            background-color: #fff;
+            background-color: @base;
             border-radius: 50%;
             width: 36px;
             height: 36px;
             position: absolute;
             left: 50%;
             top: 50%;
-            z-index: 2;
+            z-index: 1;
             margin-left: -18px;
             margin-top: -19px;
           }
+          .date-num{
+            font-size: 1rem;
+            position: relative;
+            z-index: 3;
+          }
+          .is-event{
+            content: '';
+            border: 1px solid @base;
+            background-color: #fff;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            position: absolute;
+            z-index: 2;
+            bottom: -2px;
+            left: 50%;
+            margin-left: -2px;
+          }
           &.today{
-            color: @white;
+            // color: @white;
           }
           .is-today{
             content: '';
-            border: 1px solid @base-orange;
-            background-color: @base-orange;
+            border: 1px solid @base;
             border-radius: 50%;
             width: 36px;
             height: 36px;

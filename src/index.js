@@ -8,15 +8,19 @@ function install (Vue, options = {}) {
 
   const DEFAULT_OPTION = {
     locale: 'zh', //en
-    color: ' #f29543'
+    color: ' #1f91f4',
+    separator: '/'
   }
+
+  const calendarOptions = Object.assign(DEFAULT_OPTION, options)
+
   let Calendar = {
     $vm: null,
     bindEventBus (vm) {
       this.$vm = vm
     },
     toDate (dateString) {
-      let dateArr = dateString.split('/')
+      let dateArr = dateString.split(calendarOptions.separator)
         dateArr = dateArr.map((item) => {
           return parseInt(item, 10)
         })
@@ -44,8 +48,7 @@ function install (Vue, options = {}) {
       }
     }
   }
-
-  const calendarOptions = Object.assign(DEFAULT_OPTION, options)
+  
   let dateObj = new Date()
   const VueCalendarBarEventBus = new Vue({
     data: {
