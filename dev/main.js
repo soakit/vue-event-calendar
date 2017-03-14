@@ -7,6 +7,8 @@ import vueEventCalendar from '../src/'
 Vue.use(vueEventCalendar, {locale: 'en'})
 
 new Vue({
-  el: '#app',
-  render: h => h(App)
-})
+  el: "body",
+  components: {
+    app: App
+  }
+});

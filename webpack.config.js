@@ -10,45 +10,31 @@ module.exports = {
     filename: 'index.js'
   },
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-
-          }
-        }
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.(png|jpg|gif|svg)$/,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]?[hash]'
-        }
-      }
-    ]
-  },
-  resolve: {
-    alias: {
-      'vue$': 'vue/dist/vue.common.js'
-    }
+    loaders: [{
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      loaders: [
+        'url-loader?limit=8192&name=images/[hash:8].[name].[ext]'
+      ]
+    }, {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel?presets[]=es2015'
+    }, {
+      test: /\.styl$/,
+      loader: 'css-loader!stylus-loader'
+    }, {
+      test: /\.vue$/,
+      loader: 'vue'
+    }, {
+      test: /vux.src.*?js$/,
+      loader: 'babel'
+    }]
   },
   devServer: {
     historyApiFallback: true,
     noInfo: true
   },
-  devtool: '#eval-source-map'
+  devtool: '#source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
